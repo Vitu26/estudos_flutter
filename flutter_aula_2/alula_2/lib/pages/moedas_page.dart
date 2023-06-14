@@ -20,11 +20,37 @@ class _MoedasPageState extends State<MoedasPage> {
     //criando uma lista e pegando da lista
     List<Moeda> selecionadas = [];
 
+    appBarDinamic() {
+      if (selecionadas.isEmpty) {
+        return AppBar(
+          title: Text('Cripto Moedas'),
+        );
+      } else {
+        return AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              setState(() {
+                selecionadas = [];
+              });
+            },
+          ),
+          title: Text('${selecionadas.length} selecionadas'),
+          backgroundColor: Colors.blueGrey[50],
+          elevation: 1,
+          iconTheme: IconThemeData(color:  Colors.black87),
+          titleTextStyle: TextStyle(
+            color: Colors.black87,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       //traz toda formatação necessária para se criar um app
-      appBar: AppBar(
-        title: Text('Cripto Moedas'),
-      ),
+      appBar: appBarDinamic(),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int moeda) {
           return ListTile(
@@ -64,7 +90,18 @@ class _MoedasPageState extends State<MoedasPage> {
         padding: EdgeInsets.all(16),
         separatorBuilder: (_, __) => Divider(),
         itemCount: tabela.length,
-      ), //sempre especificar o tamanho da lista),
+      ), 
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: selecionadas.isNotEmpty ? FloatingActionButton.extended(
+        onPressed: () {}, 
+        icon: Icon(Icons.star),
+        label: Text('Favoritar',
+        style: TextStyle(
+          letterSpacing: 0,
+          fontWeight: FontWeight.bold,
+        ),),
+        ) : null,
+        //sempre especificar o tamanho da lista),
     );
   }
 }
