@@ -32,10 +32,10 @@ class _MoedasPageState extends State<MoedasPage> {
             onPressed: () {
               setState(() {
                 selecionadas = [];
-              });
+              });//o metodo setState indica para o flutter que ele precisa chamar o metodo build novamente, redesenhar a tela
             },
           ),
-          title: Text('${selecionadas.length} selecionadas'),
+          title: Text('${selecionadas.length} selecionadas'),//método para mostrar quantos itens temos selecionados de forma dinamica
           backgroundColor: Colors.blueGrey[50],
           elevation: 1,
           iconTheme: IconThemeData(color:  Colors.black87),
